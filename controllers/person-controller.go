@@ -4,10 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-  "models"
+  "github.com/mohamedabdelghani/myfirstgogrudapp/models"
+  "github.com/mohamedabdelghani/myfirstgogrudapp/utils"
 	"github.com/gorilla/mux"
-	"net/http"
   "io/ioutil"
+  "strconv"
 )
 
 var person models.Person
@@ -16,7 +17,7 @@ func Add(w http.ResponseWriter, r *http.Request) {
 	person := &models.Person{}
 	utils.ParseBody(r, person)
 	b:= person.AddPerson()
-	res,_ := json.Marshal(b)
+	res,_:= json.Marshal(b)
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
 }
@@ -25,8 +26,8 @@ func Add(w http.ResponseWriter, r *http.Request) {
 func GetById(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	personId := vars["id"]
-	personDetails, _:= models.GetPersonById(personId)
-	res, _ := json.Marshal(personDetails)
+	personDetails:= models.GetPersonById(personId)
+	res,_ := json.Marshal(personDetails)
 	w.Header().Set("Content-Type", "pkglication/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
@@ -36,12 +37,12 @@ func GetById(w http.ResponseWriter, r *http.Request) {
 func GetByWeight(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	weight := vars["weight"]
-  Weight, err:= strconv.ParseFloat64(weight, 0, 0)
+  Weight, err:= strconv.ParseFloat(weight, 64)
 	if err != nil {
 		fmt.Println("Error while parsing")
 	}
-	personDetails, _:= models.GetPersonByWeight(Weight)
-	res, _ := json.Marshal(personDetails)
+	personDetails:= models.GetPersonByWeight(Weight)
+	res,_ := json.Marshal(personDetails)
 	w.Header().Set("Content-Type", "pkglication/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
@@ -50,12 +51,12 @@ func GetByWeight(w http.ResponseWriter, r *http.Request) {
 func GetByHeight(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	height := vars["height"]
-  Height, err:= strconv.ParseFloat64(weight, 0, 0)
+  Height, err:= strconv.ParseFloat(height, 64)
 	if err != nil {
 		fmt.Println("Error while parsing")
 	}
-	personDetails, _:= models.GetPersonByHeight(Height)
-	res, _ := json.Marshal(personDetails)
+	personDetails:= models.GetPersonByHeight(Height)
+	res,_ := json.Marshal(personDetails)
 	w.Header().Set("Content-Type", "pkglication/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
@@ -66,29 +67,29 @@ func Update(w http.ResponseWriter, r *http.Request) {
 	utils.ParseBody(r, updatePerson)
 	vars := mux.Vars(r)
 	personId := vars["id"]
-	personDetails, db:= models.GetPersonById(personId)
+	personDetails:= models.GetPersonById(personId)
 
 	if updatePerson.Name != "" {
 		personDetails.Name = updatePerson.Name
 	}
 	if updatePerson.LastName != "" {
-		personDetails.Height = updatePerson.Height
+		personDetails.LastName = updatePerson.LastName
 	}
-	if updatePerson.Birthday!= "" {
-		personDetails.Height = updatePerson.Height
+	if !updatePerson.Birthday.IsZero() {
+		personDetails.Birthday = updatePerson.Birthday
 	}
-  if updatePerson.Weight!= "" {
-		personDetails.Height = updatePerson.Height
+  if updatePerson.Weight > 0 {
+		personDetails.Weight = updatePerson.Weight
 	}
-  if updatePerson.Height!= "" {
+  if updatePerson.Height > 0 {
 		personDetails.Height = updatePerson.Height
 	}
 // save data to file (should abstract this logic away from controller)
  file, _ := json.MarshalIndent(updatePerson, "", " ")
 	_ = ioutil.WriteFile("logs/persons.json", file, 0644)
   
-  b:= personDetails.UpdatePerson()
-	res, _ := json.Marshal(personDetails)
+  personDetails.UpdatePerson()
+	res,_ := json.Marshal(personDetails)
 	w.Header().Set("Content-Type", "pkglication/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)

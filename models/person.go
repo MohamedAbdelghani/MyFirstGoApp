@@ -1,7 +1,9 @@
 
 package models
 
-var map _map[string]Person
+import ("time")
+
+var  _map =map[string]*Person{}
 
 type Person struct {  
     Id  string  `json:"id"`
@@ -13,7 +15,6 @@ type Person struct {
 } 
 
 func init() {
-_map = make(map[string]Person)
 }
 
 func (b *Person) AddPerson() *Person {
@@ -32,28 +33,27 @@ func GetPersonById(Id string) (*Person){
 }
 
 
-func GetPersonByHeight(height string) (Person[]){
+func GetPersonByHeight(height float64) ([]Person){
   var persons []Person
-  for k, v := range _map {
+  for _, v := range _map {
     if v.Height == height { 
-     persons = append(persons, v)
+     persons = append(persons, *v)
     }
   }
   return persons
 }
 
-func GetPersonByWeight(weight string) (*Person[]){
-	  var persons []Person
-  for k, v := range _map {
+func GetPersonByWeight(weight float64) ([]Person){
+	var persons []Person
+  for _, v := range _map {
     if v.Weight == weight { 
-     persons = append(persons, v)
+     persons = append(persons, *v)
     }
   }
   return persons
 }
 
-func DeletePerson(Id string) Person {
-	var person Person
+func DeletePerson(Id string) (*Person) {
 	person := _map[Id]
   delete(_map,Id )
 	return person
