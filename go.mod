@@ -1,4 +1,4 @@
-module github.com/mohamedabdelghani/myfirstgogrudapp
+module github.com/mohamedabdelghani/myfirstgoapp
 
 go 1.13
 

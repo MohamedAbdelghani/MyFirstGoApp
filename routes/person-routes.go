@@ -1,6 +1,6 @@
 package routes
 import (
-	"github.com/mohamedabdelghani/myfirstgogrudapp/controllers"
+	"github.com/mohamedabdelghani/myfirstgoapp/controllers"
 	"github.com/gorilla/mux"
 )
 
