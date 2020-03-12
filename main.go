@@ -8,10 +8,10 @@ import (
 )
 
 func main() {
-  r := mux.NewRouter()
-	routes.RegisterPersonRoutes(r)
-	http.Handle("/", r)
-	log.Fatal(http.ListenAndServe("localhost:8080", r))
+  router := mux.NewRouter()
+	routes.RegisterPersonRoutes(router)
+	http.Handle("/", router)
+  log.Fatal(http.ListenAndServe(":8080", router))
 }
 
 
