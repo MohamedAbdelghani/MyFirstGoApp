@@ -26,7 +26,11 @@ func Add(w http.ResponseWriter, r *http.Request) {
 func GetById(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	personId := vars["id"]
-	personDetails:= models.GetPersonById(personId)
+  Id, err:= strconv.ParseInt(personId, 0, 0)
+	if err != nil {
+		fmt.Println("Error while parsing")
+	}
+	personDetails:= models.GetPersonById(Id)
 	res,_ := json.Marshal(personDetails)
 	w.Header().Set("Content-Type", "pkglication/json")
 	w.WriteHeader(http.StatusOK)
@@ -67,7 +71,11 @@ func Update(w http.ResponseWriter, r *http.Request) {
 	utils.ParseBody(r, updatePerson)
 	vars := mux.Vars(r)
 	personId := vars["id"]
-	personDetails:= models.GetPersonById(personId)
+  Id, err:= strconv.ParseInt(personId, 0, 0)
+	if err != nil {
+		fmt.Println("Error while parsing")
+	}
+	personDetails:= models.GetPersonById(Id)
 
 	if updatePerson.Name != "" {
 		personDetails.Name = updatePerson.Name
@@ -75,8 +83,8 @@ func Update(w http.ResponseWriter, r *http.Request) {
 	if updatePerson.LastName != "" {
 		personDetails.LastName = updatePerson.LastName
 	}
-	if !updatePerson.Birthday.IsZero() {
-		personDetails.Birthday = updatePerson.Birthday
+	if !updatePerson.Birthdate.IsZero() {
+		personDetails.Birthdate = updatePerson.Birthdate
 	}
   if updatePerson.Weight > 0 {
 		personDetails.Weight = updatePerson.Weight
@@ -98,7 +106,11 @@ func Update(w http.ResponseWriter, r *http.Request) {
 func Delete(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	personId := vars["id"]
-	person:= models.DeletePerson(personId)
+  Id, err:= strconv.ParseInt(personId, 0, 0)
+	if err != nil {
+		fmt.Println("Error while parsing")
+	}
+	person:= models.DeletePerson(Id)
 	res, _ := json.Marshal(person)
 	w.Header().Set("Content-Type", "pkglication/json")
 	w.WriteHeader(http.StatusOK)

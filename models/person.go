@@ -1,15 +1,14 @@
 
 package models
-
 import ("time")
 
-var  _map =map[string]*Person{}
+var  _map =map[int64]*Person{}
 
 type Person struct {  
-    Id  string  `json:"id"`
+    Id  int64  `json:"id"`
     Name   string `json:"name"`
-    LastName    string `json:"lastname"`
-    Birthday    time.Time `json:"birthday"`
+    LastName    string `json:"last_name"`
+    Birthdate    time.Time `json:"birth_date"`
     Weight  float64 `json:"weight"`
     Height float64 `json:"height"`
 } 
@@ -27,7 +26,7 @@ func (b *Person) UpdatePerson() *Person {
 	return b
 }
 
-func GetPersonById(Id string) (*Person){
+func GetPersonById(Id int64) (*Person){
 	person := _map[Id]
 	return person
 }
@@ -53,7 +52,7 @@ func GetPersonByWeight(weight float64) ([]Person){
   return persons
 }
 
-func DeletePerson(Id string) (*Person) {
+func DeletePerson(Id int64) (*Person) {
 	person := _map[Id]
   delete(_map,Id )
 	return person
