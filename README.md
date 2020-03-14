@@ -1,3 +1,18 @@
+## Starting the Development Server
+
+Open up Terminal and navigate to the directory where you want the project to live and run these commands.
+
+```
+git clone https://github.com/MohamedAbdelghani/MyFirstGoApp.git
+```
+```
+cd MyFirstGoApp
+```
+```
+go run main.go
+```
+The api should be running on localhost:8080
+
 # Routes
 ### `POST /AddPerson`
 adds new person
