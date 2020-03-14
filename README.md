@@ -15,16 +15,16 @@ The api should be running on localhost:8080
 
 # Routes
 ### `POST /AddPerson`
-adds new person
+Adds new person
 
-### `PUT /EditPerson`
-Updates person
+### `PUT /EditPerson/{id}`
+Updates person with the specified id
 
-### `DELETE /DeletePerson`
-Removes person
+### `DELETE /DeletePerson/{id}`
+Removes person with the specified id
 
 ### `GET /GetById/{id}`
-Retrieves person of specified id.
+Retrieves person with the specified id.
 
 ### `GET /GetByWeight/{weight}`
 Retrieves persons who have specified weight.
