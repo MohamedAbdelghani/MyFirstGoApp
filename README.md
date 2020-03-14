@@ -1,7 +1,6 @@
 ## Starting the Development Server
 
-Open up Terminal and navigate to the directory where you want the project to live 
-and run the following commands:
+Navigate to the directory where you want the project to live and run the following commands:
 
 ```
 git clone https://github.com/MohamedAbdelghani/MyFirstGoApp.git
