@@ -33,21 +33,21 @@ func GetPersonById(Id int64) *Person {
 	return person
 }
 
-func GetPersonByHeight(height float64) []Person {
-	var persons []Person
+func GetPersonByHeight(height float64) []*Person {
+	var persons []*Person
 	for _, v := range _map {
 		if v.Height == height {
-			persons = append(persons, *v)
+			persons = append(persons, v)
 		}
 	}
 	return persons
 }
 
-func GetPersonByWeight(weight float64) []Person {
-	var persons []Person
+func GetPersonByWeight(weight float64) []*Person {
+	var persons []*Person
 	for _, v := range _map {
 		if v.Weight == weight {
-			persons = append(persons, *v)
+			persons = append(persons, v)
 		}
 	}
 	return persons
