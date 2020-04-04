@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/mohamedabdelghani/myfirstgoapp/controllers"
+	"github.com/mghanii/myfirstgoapp/controllers"
 )
 
 var RegisterPersonRoutes = func(router *mux.Router) {

@@ -8,8 +8,8 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
-	"github.com/mohamedabdelghani/myfirstgoapp/models"
-	"github.com/mohamedabdelghani/myfirstgoapp/utils"
+	"github.com/mghanii/myfirstgoapp/models"
+	"github.com/mghanii/myfirstgoapp/utils"
 )
 
 var person models.Person

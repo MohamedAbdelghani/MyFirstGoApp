@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/mohamedabdelghani/myfirstgoapp/routes"
+	"github.com/mghanii/myfirstgoapp/routes"
 )
 
 func main() {
